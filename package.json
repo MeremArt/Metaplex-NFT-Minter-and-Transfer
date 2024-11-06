@@ -12,7 +12,8 @@
     "nft_metadata": "ts-node ./src/nft_metadata.ts",
     "nft_mint": "ts-node ./src/nft_mint.ts",
     "core_mint": "ts-node ./src/core_mint.ts",
-    "transfer_nft": "ts-node ./src/transfer_nft.ts"
+    "transfer_nft": "ts-node ./src/transfer_nft.ts",
+    "umi": "ts-node ./src/umi.ts"
   },
   "dependencies": {
     "@coral-xyz/anchor": "0.29.0",
