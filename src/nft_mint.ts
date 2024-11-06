@@ -38,11 +38,15 @@ const myKeypairSigner = createSignerFromKeypair(umi, keypair);
 umi.use(signerIdentity(myKeypairSigner));
 umi.use(mplTokenMetadata());
 
+const collectionMint = generateSigner(umi);
+const nftMint = generateSigner(umi);
+
 const mintAddressString = "4dcKu19qYd98N4m3QCJ6v3pRRzaywunuBy6r6Sy6VbRf"; // here has to be updated with new toek address
 const mintAddress = new PublicKey(mintAddressString);
-const newOwner = new PublicKey("GeWJUMvrCWahZxy3JNyrHQ5CATxCscGB8J4xcFudPRFi");
-const mint = generateSigner(umi);
+const newOwner = new PublicKey("HgbrurVvvFNjyGZr21b6v7jRD3r1LR8ZTsTB3b5kv7MW");
 
+const mint = generateSigner(umi);
+const newMintAddress = new PublicKey(mint.publicKey);
 const commitment: Commitment = "confirmed";
 const connection = new Connection("https://api.devnet.solana.com", commitment);
 
@@ -131,6 +135,7 @@ async function ensureTokenBalance(mintAddress: PublicKey, owner: PublicKey) {
       uri: "https://devnet.irys.xyz/298Q8vfsA9cnMUA9HxGKcNj4b6M8of7jViChnXvQz3BX",
       sellerFeeBasisPoints: percentAmount(0),
       mint,
+      isCollection: true,
       creators: [
         {
           address: myKeypairSigner.publicKey,
@@ -147,7 +152,7 @@ async function ensureTokenBalance(mintAddress: PublicKey, owner: PublicKey) {
       `Successfully Minted! Check out your TX here:\nhttps://explorer.solana.com/tx/${signature}?cluster=devnet`
     );
     console.log("Mint Address: ", mint.publicKey);
-    const newMintAddress = new PublicKey(mint.publicKey);
+
     // Get or create the token accounts
     const sourceTokenAccount = await ensureTokenBalance(
       mintAddress,
@@ -163,7 +168,7 @@ async function ensureTokenBalance(mintAddress: PublicKey, owner: PublicKey) {
 
     // Convert the web3.js PublicKey to Umi PublicKey
     const destinationOwnerUmi = publicKey(newOwner.toBase58());
-
+    const newMintAddress = new PublicKey(mint.publicKey);
     // Transfer NFT
     const transferTx = await transferV1(umi, {
       authority: myKeypairSigner,
