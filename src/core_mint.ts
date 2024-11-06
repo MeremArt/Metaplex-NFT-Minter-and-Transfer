@@ -58,13 +58,15 @@ const connection = new Connection("https://api.devnet.solana.com", commitment);
 
   const asset = generateSigner(umi);
 
-  const assestpb = new PublicKey(asset.publicKey);
-
   console.log(asset.publicKey.toString());
+  const newOwner = publicKey("G9LoRR64W3N3aVpwbyUwhNXZCqUKef9PRpXCA9CRdbNK");
 
   const createAssetTx = await create(umi, {
     asset,
     collection,
+    authority: signer,
+    payer: signer,
+    owner: newOwner,
     name: "Decharge",
     uri: "https://devnet.irys.xyz/298Q8vfsA9cnMUA9HxGKcNj4b6M8of7jViChnXvQz3BX",
     plugins: [

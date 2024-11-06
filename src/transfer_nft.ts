@@ -25,7 +25,7 @@ umi.use(signerIdentity(myKeypairSigner));
   const asset = publicKey("4v9LGShGWZ2AQ7gSsNmLJ9ZSn9TY3dJtL2rcy8aiNLj2");
   const fetchedAsset = await fetchAssetV1(umi, asset);
   // Use the new Owner PublicKey
-  const newOwner = publicKey("GeWJUMvrCWahZxy3JNyrHQ5CATxCscGB8J4xcFudPRFi");
+  const newOwner = publicKey("HgbrurVvvFNjyGZr21b6v7jRD3r1LR8ZTsTB3b5kv7MW");
   const collection = publicKey("CVz3K6MYdhon6h9QbZ2QHr51qyw2UcahiJEsRcZqJYh6");
   //   const updateTx = await updateCollectionPlugin(umi, {
   //     collection,
